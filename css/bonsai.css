@@ -197,6 +197,53 @@ nav a.active::after { width: 100%; }
 .tip-title { font-family: 'Shippori Mincho', serif; font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
 .tip-text { font-size: 13px; color: var(--stone); line-height: 1.6; }
 
+/* ── SPHAIGNE (entretien) ───────────────── */
+.sphaigne-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 0.5px solid var(--border);
+  min-height: 480px;
+}
+.sphaigne-img {
+  overflow: hidden; background: var(--cream-warm);
+}
+.sphaigne-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.7s ease;
+}
+.sphaigne-img:hover img { transform: scale(1.04); }
+.sphaigne-content {
+  padding: 72px 64px; background: var(--white);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.sphaigne-eyebrow {
+  font-family: 'Noto Serif JP', serif; font-size: 11px;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--stone); margin-bottom: 20px;
+  display: flex; align-items: center; gap: 10px;
+}
+.sphaigne-eyebrow::before { content: ''; width: 24px; height: 0.5px; background: var(--stone); display: block; }
+.sphaigne-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: clamp(24px, 3vw, 38px); font-weight: 500;
+  color: var(--ink); line-height: 1.2; margin-bottom: 24px;
+}
+.sphaigne-text {
+  font-size: 14px; color: var(--ink-light); line-height: 1.8; margin-bottom: 20px;
+}
+.sphaigne-list {
+  list-style: none; margin-bottom: 28px;
+}
+.sphaigne-list li {
+  font-size: 14px; color: var(--ink-light); line-height: 1.7;
+  padding: 10px 0; border-bottom: 0.5px solid var(--border);
+}
+.sphaigne-list li:last-child { border-bottom: none; }
+.sphaigne-tip {
+  background: var(--moss-pale); border-left: 3px solid var(--moss);
+  padding: 16px 20px; font-size: 14px; color: var(--moss);
+  font-style: italic; line-height: 1.6;
+}
+
 /* ── ENTRETIEN PAGE ─────────────────────── */
 .care-full { padding: 64px 40px; }
 .care-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0; border: 0.5px solid var(--border); }
@@ -345,6 +392,9 @@ footer ul a:hover { color: white; }
   .philosophy { grid-template-columns: 1fr; }
   .philosophy-item { border-right: none; border-bottom: 0.5px solid var(--border); }
   .section-header { flex-direction: column; align-items: flex-start; gap: 20px; padding: 40px 20px 20px; }
+  .sphaigne-section { grid-template-columns: 1fr; }
+  .sphaigne-img { min-height: 280px; }
+  .sphaigne-content { padding: 40px 24px; }
   .care-section { grid-template-columns: 1fr; }
   .care-grid { grid-template-columns: 1fr; }
   .care-card:nth-child(n) { border-right: none; }
