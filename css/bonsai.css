@@ -67,22 +67,24 @@ nav a.active::after { width: 100%; }
   display: grid; grid-template-columns: 1fr 1fr;
   min-height: calc(100vh - 64px); max-height: 800px;
   position: relative;
-  background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1600&q=85');
+  background-image: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1600&q=85');
   background-size: cover;
-  background-position: center 35%;
+  background-position: center 40%;
 }
 .hero::before {
   content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
   background:
     linear-gradient(to right,
-      rgba(245,242,236,1)   0%,
-      rgba(245,242,236,0.98) 28%,
-      rgba(245,242,236,0.55) 55%,
-      rgba(245,242,236,0.04) 85%
+      rgba(245,242,236,1)    0%,
+      rgba(245,242,236,1)   38%,
+      rgba(245,242,236,0.75) 58%,
+      rgba(245,242,236,0.08) 100%
     ),
     linear-gradient(to bottom,
-      transparent 65%,
-      rgba(245,242,236,0.7) 100%
+      rgba(245,242,236,0.15) 0%,
+      transparent 20%,
+      transparent 72%,
+      rgba(245,242,236,0.85) 100%
     );
 }
 .hero-text {
