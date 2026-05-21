@@ -65,7 +65,7 @@ nav a.active::after { width: 100%; }
 /* ── HERO (index) ────────────────────────── */
 .hero {
   display: grid; grid-template-columns: 1fr 0.55fr;
-  min-height: calc(100vh - 64px); max-height: 800px;
+  height: calc(100vh - 64px); max-height: 800px;
   position: relative;
   background: var(--cream);
   overflow: hidden;
