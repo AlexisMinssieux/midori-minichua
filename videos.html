@@ -71,6 +71,13 @@
   height: 100%;
   border: 0;
 }
+.facade-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 60%, transparent 100%);
+  z-index: 0;
+}
+.video-facade svg, .video-facade span { position: relative; z-index: 1; }
 
 @media (max-width: 900px) {
   .videos-grid { grid-template-columns: repeat(2, 1fr); padding: 32px 24px 48px; }
@@ -113,15 +120,18 @@
 
 <!-- VIDEOS GRID -->
 <div class="videos-grid" id="videosGrid">
-  <div class="video-facade" onclick="loadVideo(this,'7635621608975011074')">
+  <div class="video-facade" data-id="7635621608975011074" onclick="loadVideo(this,'7635621608975011074')">
+    <div class="facade-overlay"></div>
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
     <span>Appuyer pour regarder</span>
   </div>
-  <div class="video-facade" onclick="loadVideo(this,'7643802418777541921')">
+  <div class="video-facade" data-id="7643802418777541921" onclick="loadVideo(this,'7643802418777541921')">
+    <div class="facade-overlay"></div>
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
     <span>Appuyer pour regarder</span>
   </div>
-  <div class="video-facade" onclick="loadVideo(this,'7632671595160522006')">
+  <div class="video-facade" data-id="7632671595160522006" onclick="loadVideo(this,'7632671595160522006')">
+    <div class="facade-overlay"></div>
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
     <span>Appuyer pour regarder</span>
   </div>
@@ -175,9 +185,27 @@ function loadVideo(el, id) {
   iframe.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture';
   el.innerHTML = '';
   el.style.cursor = 'default';
+  el.style.background = '#111';
   el.appendChild(iframe);
   el.onclick = null;
 }
+
+/* Charge les miniatures via oEmbed */
+document.querySelectorAll('.video-facade[data-id]').forEach(el => {
+  const id = el.dataset.id;
+  const url = encodeURIComponent('https://www.tiktok.com/@handsky69/video/' + id);
+  fetch('https://www.tiktok.com/oembed?url=' + url)
+    .then(r => r.json())
+    .then(data => {
+      if (data.thumbnail_url) {
+        el.style.backgroundImage = 'url(' + data.thumbnail_url + ')';
+        el.style.backgroundSize = 'cover';
+        el.style.backgroundPosition = 'center';
+      }
+    })
+    .catch(() => { /* pas de miniature, fond noir par défaut */ });
+});
+
 const cart = JSON.parse(localStorage.getItem('midori_cart') || '[]');
 const count = cart.reduce((s,c) => s+c.qty, 0);
 const badge = document.getElementById('cartCount');
