@@ -122,7 +122,7 @@
   <div>
     <h4>Contact</h4>
     <ul>
-      <li><a href="mailto:contact@midori-minichua.fr">contact@midori-minichua.fr</a></li>
+      <li><a href="mailto:g.minssieux@orange.fr">g.minssieux@orange.fr</a></li>
       <li><a href="https://www.tiktok.com/@handsky69" target="_blank">TikTok</a></li>
       <li><a href="#">Instagram</a></li>
       <li><a href="#">Facebook</a></li>
@@ -225,7 +225,7 @@ function closeCart() { document.getElementById('cartSidebar').classList.remove('
 function handleCheckout() {
   const lines = cart.map(c => `- ${c.name} × ${c.qty} : ${(c.price*c.qty).toFixed(2).replace('.',',')} €`).join('%0A');
   const total = cart.reduce((s,c)=>s+c.price*c.qty,0).toFixed(2).replace('.',',');
-  window.location.href = `mailto:contact@midori-minichua.fr?subject=Commande Midori Minichua&body=Bonjour,%0A%0AJe souhaite commander :%0A${lines}%0A%0ATotal : ${total} €%0A%0AMerci !`;
+  window.location.href = `mailto:g.minssieux@orange.fr?subject=Commande Midori Minichua&body=Bonjour,%0A%0AJe souhaite commander :%0A${lines}%0A%0ATotal : ${total} €%0A%0AMerci !`;
 }
 function showToast(msg) {
   const t = document.getElementById('toast');
