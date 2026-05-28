@@ -16,10 +16,6 @@
   max-width: 1100px;
   margin: 0 auto;
 }
-.tiktok-embed {
-  border-radius: 8px;
-  overflow: hidden;
-}
 .videos-cta {
   text-align: center;
   padding: 0 40px 64px;
@@ -41,6 +37,41 @@
 }
 .videos-cta a:hover { opacity: 0.8; }
 .tiktok-icon { width: 18px; height: 18px; fill: #fff; }
+
+/* Facade */
+.video-facade {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9/16;
+  background: #111;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: #fff;
+  transition: opacity 0.2s;
+}
+.video-facade:hover { opacity: 0.88; }
+.video-facade svg { width: 48px; height: 48px; fill: #fff; opacity: 0.9; }
+.video-facade span {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+.video-facade iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 @media (max-width: 900px) {
   .videos-grid { grid-template-columns: repeat(2, 1fr); padding: 32px 24px 48px; }
 }
@@ -82,15 +113,18 @@
 
 <!-- VIDEOS GRID -->
 <div class="videos-grid" id="videosGrid">
-  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@handsky69/video/7635621608975011074" data-video-id="7635621608975011074" style="max-width:605px;min-width:325px;">
-    <section></section>
-  </blockquote>
-  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@handsky69/video/7643802418777541921" data-video-id="7643802418777541921" style="max-width:605px;min-width:325px;">
-    <section></section>
-  </blockquote>
-  <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@handsky69/video/7632671595160522006" data-video-id="7632671595160522006" style="max-width:605px;min-width:325px;">
-    <section></section>
-  </blockquote>
+  <div class="video-facade" onclick="loadVideo(this,'7635621608975011074')">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
+    <span>Appuyer pour regarder</span>
+  </div>
+  <div class="video-facade" onclick="loadVideo(this,'7643802418777541921')">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
+    <span>Appuyer pour regarder</span>
+  </div>
+  <div class="video-facade" onclick="loadVideo(this,'7632671595160522006')">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.77 1.52V6.75a4.85 4.85 0 01-1-.06z"/></svg>
+    <span>Appuyer pour regarder</span>
+  </div>
 </div>
 
 <!-- LIEN PROFIL -->
@@ -133,8 +167,17 @@
   <p>Créations artisanales · Près de Lyon</p>
 </div>
 
-<script async src="https://www.tiktok.com/embed.js"></script>
 <script>
+function loadVideo(el, id) {
+  const iframe = document.createElement('iframe');
+  iframe.src = 'https://www.tiktok.com/embed/v2/' + id;
+  iframe.allowFullscreen = true;
+  iframe.allow = 'autoplay; clipboard-write; encrypted-media; picture-in-picture';
+  el.innerHTML = '';
+  el.style.cursor = 'default';
+  el.appendChild(iframe);
+  el.onclick = null;
+}
 const cart = JSON.parse(localStorage.getItem('midori_cart') || '[]');
 const count = cart.reduce((s,c) => s+c.qty, 0);
 const badge = document.getElementById('cartCount');
