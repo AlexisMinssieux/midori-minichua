@@ -135,7 +135,20 @@
 </div>
 
 <script>
-const products = [];
+const products = [
+  {
+    id: 1,
+    name: "Lanterne japonaise en grès",
+    species: "Décoration",
+    age: "8 cm · Grès céramique · Gris",
+    price: 19,
+    tag: "Nouveau",
+    category: "accessoire",
+    img: "img/lanterne-japonaise-gres.jpg",
+    tags: ["Grès", "Fait main", "Zen"],
+    desc: "Lanterne jardin japonaise 8 cm de haut en grès, idéale pour micro jardin zen, bonsaï ou fontaine. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
+  }
+];
 
 let cart = JSON.parse(localStorage.getItem('midori_cart') || '[]');
 
