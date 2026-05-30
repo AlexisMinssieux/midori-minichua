@@ -9,7 +9,7 @@
 <title>Boutique — Midori Minichua</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/bonsai.css?v=10">
+<link rel="stylesheet" href="css/bonsai.css?v=11">
 </head>
 <body>
 
@@ -52,6 +52,10 @@
       <div class="modal-desc" id="modalDesc"></div>
       <div class="modal-price" id="modalPrice"></div>
       <button class="modal-add-btn" id="modalAddBtn">Ajouter au panier</button>
+      <a class="modal-stripe-btn" id="modalStripeBtn" href="#" target="_blank" rel="noopener" style="display:none">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Payer par carte
+      </a>
     </div>
   </div>
 </div>
@@ -153,7 +157,8 @@ const products = [
     img: "img/lanterne-gres-1.jpg",
     imgs: ["img/lanterne-gres-1.jpg", "img/lanterne-gres-2.jpg", "img/lanterne-gres-3.jpg"],
     tags: ["Grès", "Fait main", "Zen"],
-    desc: "Lanterne jardin japonaise 8 cm de haut en grès, idéale pour micro jardin zen, bonsaï ou fontaine. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
+    desc: "Lanterne jardin japonaise 8 cm de haut en grès, idéale pour micro jardin zen, bonsaï ou fontaine. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval.",
+    stripeLink: null
   },
   {
     id: 2,
@@ -166,7 +171,8 @@ const products = [
     img: "img/moines-bouddhistes-1.jpg",
     imgs: ["img/moines-bouddhistes-1.jpg", "img/moines-bouddhistes-2.jpg", "img/moines-bouddhistes-3.jpg"],
     tags: ["Grès", "Zen", "Méditation"],
-    desc: "Set de 4 moines bouddhistes en grès zen méditation, 4 cm de haut. Les 4 sages : ne pas voir, ne pas parler, ne pas entendre, et sourire. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
+    desc: "Set de 4 moines bouddhistes en grès zen méditation, 4 cm de haut. Les 4 sages : ne pas voir, ne pas parler, ne pas entendre, et sourire. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval.",
+    stripeLink: null
   },
   {
     id: 3,
@@ -179,7 +185,8 @@ const products = [
     img: "img/moines-sourire-1.jpg",
     imgs: ["img/moines-sourire-1.jpg", "img/moines-sourire-2.jpg", "img/moines-sourire-3.jpg"],
     tags: ["Grès", "Zen", "Méditation"],
-    desc: "Set de 4 moines bouddhistes en grès zen méditation souriant, 4 cm de haut. Chaque moine tient un petit livre. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
+    desc: "Set de 4 moines bouddhistes en grès zen méditation souriant, 4 cm de haut. Chaque moine tient un petit livre. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval.",
+    stripeLink: null
   },
   {
     id: 4,
@@ -192,7 +199,8 @@ const products = [
     img: "img/bouddha-gres-1.jpg",
     imgs: ["img/bouddha-gres-1.jpg", "img/bouddha-gres-2.jpg", "img/bouddha-gres-3.jpg"],
     tags: ["Grès", "Zen", "Méditation"],
-    desc: "Statue bouddha 20 cm en grès zen méditation. État neuf. Livraison dès 6,49 € ou remise en main propre à Saint-Genis-Laval."
+    desc: "Statue bouddha 20 cm en grès zen méditation. État neuf. Livraison dès 6,49 € ou remise en main propre à Saint-Genis-Laval.",
+    stripeLink: null
   },
   {
     id: 5,
@@ -205,7 +213,8 @@ const products = [
     img: "img/moine-gres-1.jpg",
     imgs: ["img/moine-gres-1.jpg", "img/moine-gres-2.jpg", "img/moine-gres-3.jpg"],
     tags: ["Grès", "Zen", "Méditation"],
-    desc: "Moine bouddiste en grès 14 cm de haut, zen méditation, mains jointes. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
+    desc: "Moine bouddiste en grès 14 cm de haut, zen méditation, mains jointes. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval.",
+    stripeLink: null
   }
 ];
 
@@ -270,6 +279,13 @@ function openModal(id) {
   document.getElementById('modalPrice').textContent = p.price.toFixed(2).replace('.',',') + ' €';
   document.getElementById('modalTags').innerHTML = p.tags.map(t => `<span class="modal-tag">${t}</span>`).join('');
   document.getElementById('modalAddBtn').onclick = () => { addToCart(id); closeModal(); };
+  const stripeBtn = document.getElementById('modalStripeBtn');
+  if (p.stripeLink) {
+    stripeBtn.href = p.stripeLink;
+    stripeBtn.style.display = 'flex';
+  } else {
+    stripeBtn.style.display = 'none';
+  }
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
