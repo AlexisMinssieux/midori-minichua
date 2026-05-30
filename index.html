@@ -9,7 +9,7 @@
 <title>Midori Minichua — Bonsaïs Artisanaux</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/bonsai.css?v=10">
+<link rel="stylesheet" href="css/bonsai.css?v=12">
 </head>
 <body>
 
@@ -49,8 +49,19 @@
     <a href="contact.html" class="icon-btn" title="Nous contacter">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+<nav class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navMobileClose">✕</button>
+  <a href="index.html">Mes créations</a>
+  <a href="boutique.html">Boutique</a>
+  <a href="entretien.html">Entretien</a>
+  <a href="videos.html">Vidéos</a>
+  <a href="contact.html">Contact</a>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -204,5 +215,6 @@ function closeModal() { document.getElementById('modalOverlay').classList.remove
 document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
 renderProducts();
 </script>
+<script src="js/nav.js"></script>
 </body>
 </html>
