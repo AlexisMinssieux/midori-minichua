@@ -6,7 +6,7 @@
 <title>Boutique — Midori Minichua</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/bonsai.css?v=5">
+<link rel="stylesheet" href="css/bonsai.css?v=6">
 </head>
 <body>
 
@@ -36,7 +36,10 @@
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
-    <div class="modal-img"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-img">
+      <img id="modalImg" src="" alt="">
+      <div class="modal-thumbs" id="modalThumbs"></div>
+    </div>
     <div class="modal-content">
       <button class="modal-close" onclick="closeModal()">✕</button>
       <div class="modal-species" id="modalSpecies"></div>
@@ -145,6 +148,7 @@ const products = [
     tag: "Nouveau",
     category: "accessoire",
     img: "img/lanterne-japonaise-gres.jpg",
+    imgs: ["img/lanterne-japonaise-gres.jpg", "img/lanterne-japonaise-gres-2.jpg", "img/lanterne-japonaise-gres-3.jpg"],
     tags: ["Grès", "Fait main", "Zen"],
     desc: "Lanterne jardin japonaise 8 cm de haut en grès, idéale pour micro jardin zen, bonsaï ou fontaine. État neuf. Livraison dès 4,99 € ou remise en main propre à Saint-Genis-Laval."
   }
@@ -189,8 +193,21 @@ function filterProducts(cat, btn) {
 
 function openModal(id) {
   const p = products.find(x => x.id === id);
-  document.getElementById('modalImg').src = p.img;
-  document.getElementById('modalImg').alt = p.name;
+  const imgs = p.imgs && p.imgs.length ? p.imgs : [p.img];
+  const mainImg = document.getElementById('modalImg');
+  mainImg.src = imgs[0];
+  mainImg.alt = p.name;
+  // Thumbnails
+  const thumbsEl = document.getElementById('modalThumbs');
+  if (imgs.length > 1) {
+    thumbsEl.innerHTML = imgs.map((src, i) =>
+      `<img src="${src}" class="${i===0?'active':''}" onclick="switchModalImg(this,'${src}')">`
+    ).join('');
+    thumbsEl.style.display = 'flex';
+  } else {
+    thumbsEl.innerHTML = '';
+    thumbsEl.style.display = 'none';
+  }
   document.getElementById('modalSpecies').textContent = p.species;
   document.getElementById('modalName').textContent = p.name;
   document.getElementById('modalAge').textContent = p.age;
@@ -200,6 +217,11 @@ function openModal(id) {
   document.getElementById('modalAddBtn').onclick = () => { addToCart(id); closeModal(); };
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+}
+function switchModalImg(thumb, src) {
+  document.getElementById('modalImg').src = src;
+  document.querySelectorAll('#modalThumbs img').forEach(t => t.classList.remove('active'));
+  thumb.classList.add('active');
 }
 function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
 document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
