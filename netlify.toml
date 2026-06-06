@@ -5,3 +5,8 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/"
+  to = "/boutique.html"
+  status = 301
