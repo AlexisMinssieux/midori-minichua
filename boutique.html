@@ -3,13 +3,59 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
-<title>Boutique — Midori Minichua</title>
+<title>Boutique — Bonsaïs, dioramas & décoration zen | Midori Minichua</title>
+<meta name="description" content="Achetez en ligne nos bonsaïs, micro-paysages, dioramas lumineux et décorations zen faits main. Paiement sécurisé par carte, livraison en France ou remise en main propre près de Lyon.">
+<meta name="keywords" content="acheter bonsaï, boutique bonsaï, diorama lumineux, micro paysage zen, décoration japonaise, statue bouddha, lanterne japonaise, moine bouddhiste, paiement en ligne">
+<meta name="author" content="Midori Minichua">
+<link rel="canonical" href="https://midori-minichua.fr/boutique.html">
+
+<!-- Open Graph / Facebook / TikTok / WhatsApp -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Midori Minichua">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Boutique — Bonsaïs, dioramas & décoration zen | Midori Minichua">
+<meta property="og:description" content="Bonsaïs, dioramas lumineux et décorations zen faits main. Paiement sécurisé, livraison partout en France.">
+<meta property="og:url" content="https://midori-minichua.fr/boutique.html">
+<meta property="og:image" content="https://midori-minichua.fr/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Créations Midori Minichua">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boutique Midori Minichua — Bonsaïs & dioramas zen">
+<meta name="twitter:description" content="Bonsaïs, dioramas lumineux et décorations zen faits main. Livraison partout en France.">
+<meta name="twitter:image" content="https://midori-minichua.fr/img/og-image.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/bonsai.css?v=12">
+
+<!-- Données structurées : Magasin / Commerce local -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Store",
+  "name": "Midori Minichua",
+  "alternateName": "緑盆栽",
+  "url": "https://midori-minichua.fr/boutique.html",
+  "image": "https://midori-minichua.fr/img/og-image.jpg",
+  "description": "Boutique de bonsaïs, micro-paysages et dioramas zen artisanaux faits main près de Lyon.",
+  "email": "g.minssieux@orange.fr",
+  "priceRange": "€€",
+  "areaServed": "FR",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Saint-Genis-Laval",
+    "postalCode": "69230",
+    "addressRegion": "Auvergne-Rhône-Alpes",
+    "addressCountry": "FR"
+  },
+  "sameAs": [
+    "https://www.tiktok.com/@handsky69"
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -420,6 +466,40 @@ function showToast(msg) {
 }
 renderProducts();
 updateCartUI();
+
+// Données structurées Produits (SEO — prix affichés dans Google)
+(function injectProductSchema() {
+  const BASE = 'https://midori-minichua.fr/';
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Boutique Midori Minichua",
+    "itemListElement": products.map((p, i) => ({
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "Product",
+        "name": p.name,
+        "image": BASE + p.img,
+        "description": p.desc,
+        "category": p.species,
+        "brand": { "@type": "Brand", "name": "Midori Minichua" },
+        "offers": {
+          "@type": "Offer",
+          "price": p.price.toFixed(2),
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock",
+          "itemCondition": "https://schema.org/NewCondition",
+          "url": BASE + "boutique.html"
+        }
+      }
+    }))
+  };
+  const s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(itemList);
+  document.head.appendChild(s);
+})();
 
 
 // Retour depuis Stripe Checkout
