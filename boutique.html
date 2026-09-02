@@ -201,7 +201,7 @@
 </div>
 
 <script>
-const products = [
+let products = [
   {
     id: 2,
     name: "4 moines bouddhistes en grès",
@@ -348,8 +348,10 @@ const products = [
 ];
 
 let cart = JSON.parse(localStorage.getItem('midori_cart') || '[]');
+let currentFilter = 'all';
 
-function renderProducts(filter = 'all') {
+function renderProducts(filter = currentFilter) {
+  currentFilter = filter;
   const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
   if (filtered.length === 0) {
     document.getElementById('productGrid').innerHTML = `
@@ -361,7 +363,7 @@ function renderProducts(filter = 'all') {
     return;
   }
   document.getElementById('productGrid').innerHTML = filtered.map(p => `
-    <div class="product-card" onclick="openModal(${p.id})">
+    <div class="product-card" onclick="openModal('${p.id}')">
       <div class="product-img-wrap">
         <img src="${p.img}" alt="${p.name}" loading="lazy">
         ${p.tag ? `<div class="product-tag ${p.tag==='Rare'?'rare':p.tag==='Nouveau'?'new':''}">${p.tag}</div>` : ''}
@@ -372,7 +374,7 @@ function renderProducts(filter = 'all') {
         <div class="product-age">${p.age}</div>
         <div class="product-footer">
           <div class="product-price">${p.price.toFixed(2).replace('.',',')} €</div>
-          <button class="add-btn" onclick="event.stopPropagation();addToCart(${p.id})" title="Ajouter au panier">+</button>
+          <button class="add-btn" onclick="event.stopPropagation();addToCart('${p.id}')" title="Ajouter au panier">+</button>
         </div>
       </div>
     </div>`).join('');
@@ -385,7 +387,7 @@ function filterProducts(cat, btn) {
 }
 
 function openModal(id) {
-  const p = products.find(x => x.id === id);
+  const p = products.find(x => x.id == id);
   const imgs = p.imgs && p.imgs.length ? p.imgs : [p.img];
   const mainImg = document.getElementById('modalImg');
   mainImg.src = imgs[0];
@@ -420,15 +422,15 @@ function closeModal() { document.getElementById('modalOverlay').classList.remove
 document.getElementById('modalOverlay').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
 
 function addToCart(id) {
-  const p = products.find(x => x.id === id);
-  const ex = cart.find(c => c.id === id);
+  const p = products.find(x => x.id == id);
+  const ex = cart.find(c => c.id == id);
   if (ex) ex.qty++; else cart.push({...p, qty:1});
   localStorage.setItem('midori_cart', JSON.stringify(cart));
   updateCartUI();
   showToast(`${p.name} ajouté au panier`);
 }
 function removeFromCart(id) {
-  cart = cart.filter(c => c.id !== id);
+  cart = cart.filter(c => c.id != id);
   localStorage.setItem('midori_cart', JSON.stringify(cart));
   updateCartUI();
 }
@@ -445,7 +447,7 @@ function updateCartUI() {
         <div class="cart-item">
           <img src="${c.img}" alt="${c.name}">
           <div><div class="cart-item-name">${c.name}</div><div class="cart-item-price">${c.price.toFixed(2).replace('.',',')} € × ${c.qty}</div></div>
-          <button class="cart-item-remove" onclick="removeFromCart(${c.id})">✕</button>
+          <button class="cart-item-remove" onclick="removeFromCart('${c.id}')">✕</button>
         </div>`).join('');
 }
 function openCart() { document.getElementById('cartSidebar').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); document.body.style.overflow = 'hidden'; }
@@ -479,10 +481,13 @@ function showToast(msg) {
 }
 renderProducts();
 updateCartUI();
+injectProductSchema();
+loadAirtableProducts();
 
 // Données structurées Produits (SEO — prix affichés dans Google)
-(function injectProductSchema() {
+function injectProductSchema() {
   const BASE = 'https://midori-minichua.fr/';
+  const abs = (u) => /^https?:\/\//.test(u) ? u : BASE + u;
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -493,7 +498,7 @@ updateCartUI();
       "item": {
         "@type": "Product",
         "name": p.name,
-        "image": BASE + p.img,
+        "image": abs(p.img),
         "description": p.desc,
         "category": p.species,
         "brand": { "@type": "Brand", "name": "Midori Minichua" },
@@ -508,11 +513,31 @@ updateCartUI();
       }
     }))
   };
+  const old = document.getElementById('product-schema');
+  if (old) old.remove();
   const s = document.createElement('script');
   s.type = 'application/ld+json';
+  s.id = 'product-schema';
   s.textContent = JSON.stringify(itemList);
   document.head.appendChild(s);
-})();
+}
+
+// Produits ajoutés via Airtable (back-office : ajout de produits sans code)
+async function loadAirtableProducts() {
+  try {
+    const res = await fetch('/.netlify/functions/products');
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.products && data.products.length) {
+      const existing = new Set(products.map(p => String(p.id)));
+      const fresh = data.products.filter(p => !existing.has(String(p.id)));
+      if (!fresh.length) return;
+      products = [...fresh, ...products];   // les nouveaux produits en premier
+      renderProducts();
+      injectProductSchema();
+    }
+  } catch (e) { /* silencieux : la boutique conserve ses produits existants */ }
+}
 
 
 // Retour depuis Stripe Checkout
