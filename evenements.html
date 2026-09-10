@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expo-ventes & événements — Où nous rencontrer | Midori Minichua</title>
+<meta name="description" content="Retrouvez Midori Minichua en vrai lors de nos prochaines expo-ventes et marchés d'artisans près de Lyon. Bonsaïs, micro-paysages et dioramas zen à découvrir sur place.">
+<meta name="keywords" content="expo-vente bonsaï Lyon, marché artisanal Lyon, braderie Croix-Rousse, artisan bonsaï événement, stand bonsaï">
+<meta name="author" content="Midori Minichua">
+<link rel="canonical" href="https://midori-minichua.fr/evenements.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Midori Minichua">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:title" content="Expo-ventes & événements — Midori Minichua">
+<meta property="og:description" content="Retrouvez nos créations en vrai lors de nos prochaines expo-ventes près de Lyon.">
+<meta property="og:url" content="https://midori-minichua.fr/evenements.html">
+<meta property="og:image" content="https://midori-minichua.fr/img/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Expo-ventes & événements — Midori Minichua">
+<meta name="twitter:description" content="Retrouvez nos créations en vrai lors de nos prochaines expo-ventes près de Lyon.">
+<meta name="twitter:image" content="https://midori-minichua.fr/img/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&family=Shippori+Mincho:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/bonsai.css?v=12">
+
+<style>
+.event-wrap { max-width: 1000px; margin: 0 auto; padding: 8px 40px 72px; }
+.event-card {
+  display: grid; grid-template-columns: 0.85fr 1fr; gap: 44px; align-items: start;
+  background: var(--white); border: 0.5px solid var(--border); border-radius: 4px;
+  padding: 36px; box-shadow: 0 24px 60px -30px rgba(0,0,0,.28);
+}
+.event-poster {
+  margin: 0; border-radius: 3px; overflow: hidden;
+  box-shadow: 0 14px 40px -18px rgba(0,0,0,.4); background: var(--cream);
+}
+.event-poster img { width: 100%; height: auto; display: block; }
+.event-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Noto Serif JP', serif; font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--moss); font-weight: 500; margin-bottom: 16px;
+}
+.event-badge .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--moss); }
+.event-title {
+  font-family: 'Shippori Mincho', serif; font-size: 30px; font-weight: 500;
+  color: var(--ink); line-height: 1.2; margin: 0 0 22px;
+}
+.event-facts { list-style: none; padding: 0; margin: 0 0 26px; display: flex; flex-direction: column; gap: 16px; }
+.event-facts li { display: flex; gap: 14px; align-items: flex-start; }
+.event-facts .ic { font-size: 20px; line-height: 1.4; flex: none; }
+.event-facts .lbl { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone); margin-bottom: 2px; }
+.event-facts .val { font-size: 16px; color: var(--ink); font-weight: 500; }
+.event-desc { font-size: 14.5px; color: var(--stone); line-height: 1.85; margin: 0 0 20px; }
+.event-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.event-tags span {
+  font-size: 12px; color: var(--ink); background: var(--cream);
+  border: 0.5px solid var(--border); border-radius: 999px; padding: 5px 13px;
+}
+.event-note {
+  background: var(--cream); border-left: 2px solid var(--moss); border-radius: 2px;
+  padding: 16px 18px; font-size: 14.5px; color: var(--ink); line-height: 1.7; margin-bottom: 28px;
+}
+.event-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.event-link-out {
+  font-size: 13px; color: var(--stone); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px; align-self: center;
+}
+.event-link-out:hover { color: var(--moss); }
+@media (max-width: 760px) {
+  .event-wrap { padding: 8px 20px 56px; }
+  .event-card { grid-template-columns: 1fr; gap: 28px; padding: 22px; }
+  .event-poster { max-width: 360px; margin: 0 auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<!-- HEADER -->
+<header>
+  <a href="creations.html" class="logo">Midori Minichua <span class="logo-kanji">緑盆栽</span></a>
+  <nav>
+    <a href="boutique.html">Boutique</a>
+    <a href="creations.html">Mes créations</a>
+    <a href="entretien.html">Entretien</a>
+    <a href="videos.html">Vidéos</a>
+    <a href="evenements.html" class="active">Événements</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <div class="header-icons">
+    <div class="cart-wrapper">
+      <a href="creations.html" class="icon-btn" title="Voir le panier">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-badge" id="cartCount" style="display:none">0</span>
+      </a>
+    </div>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="nav-mobile" id="navMobile">
+  <button class="nav-mobile-close" id="navMobileClose">✕</button>
+  <a href="boutique.html">Boutique</a>
+  <a href="creations.html">Mes créations</a>
+  <a href="entretien.html">Entretien</a>
+  <a href="videos.html">Vidéos</a>
+  <a href="evenements.html">Événements</a>
+  <a href="contact.html">Contact</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-eyebrow">Nous rencontrer</div>
+  <h1 class="page-hero-title">Prochaine<br>expo-vente</h1>
+  <p class="page-hero-desc">Venez découvrir les créations Midori Minichua en vrai — bonsaïs, micro-paysages et dioramas zen. On vous attend avec plaisir !</p>
+</div>
+
+<!-- ÉVÉNEMENT -->
+<div class="event-wrap">
+  <article class="event-card">
+    <figure class="event-poster">
+      <img src="img/braderie-croix-rousse-2026.jpg" alt="Affiche de la Grande Braderie de la Croix-Rousse, 12 et 13 septembre, Lyon">
+    </figure>
+    <div class="event-info">
+      <div class="event-badge"><span class="pulse"></span>Prochain rendez-vous</div>
+      <h2 class="event-title">La Grande Braderie<br>de la Croix-Rousse</h2>
+
+      <ul class="event-facts">
+        <li>
+          <span class="ic">📅</span>
+          <div>
+            <div class="lbl">Dates</div>
+            <div class="val">Vendredi 12 &amp; samedi 13 septembre 2026 · 9h – 19h</div>
+          </div>
+        </li>
+        <li>
+          <span class="ic">📍</span>
+          <div>
+            <div class="lbl">Lieu</div>
+            <div class="val">Quartier de la Croix-Rousse — Lyon</div>
+          </div>
+        </li>
+        <li>
+          <span class="ic">🌿</span>
+          <div>
+            <div class="lbl">Notre stand</div>
+            <div class="val">Bonsaïs, micro-paysages &amp; dioramas zen</div>
+          </div>
+        </li>
+      </ul>
+
+      <p class="event-desc">Deux jours de fête dans l'un des plus beaux quartiers de Lyon : braderie, artisanat, vide-grenier, rue italienne, food-trucks, orchestre et manège. Une belle occasion de flâner et de repartir avec une petite création faite main.</p>
+
+      <div class="event-tags">
+        <span>Braderie</span><span>Artisanat</span><span>Vide-grenier</span>
+        <span>Food-trucks</span><span>Orchestre</span><span>Manège</span>
+      </div>
+
+      <div class="event-note">
+        🍵 Retrouvez notre stand parmi les artisans, et venez échanger autour de nos bonsaïs et jardins miniatures. Au plaisir de vous y croiser !
+      </div>
+
+      <div class="event-actions">
+        <a href="contact.html" class="hero-cta" style="display:inline-flex;">
+          Nous contacter
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://reservation-braderiecxrousse.fr" target="_blank" rel="noopener" class="event-link-out">
+          Infos sur l'événement ↗
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <a href="creations.html" class="footer-logo">Midori Minichua 緑盆栽</a>
+    <p>Créations artisanales de bonsaïs, compositions miniatures et jardins zen. Réalisées avec amour près de Lyon.</p>
+    <p style="margin-top:12px;font-size:12px;">📍 Près de Lyon, France</p>
+  </div>
+  <div>
+    <h4>Navigation</h4>
+    <ul>
+      <li><a href="creations.html">Mes créations</a></li>
+      <li><a href="boutique.html">Boutique</a></li>
+      <li><a href="entretien.html">Entretien</a></li>
+      <li><a href="videos.html">Vidéos</a></li>
+      <li><a href="evenements.html">Événements</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="mailto:g.minssieux@orange.fr">g.minssieux@orange.fr</a></li>
+      <li><a href="https://www.tiktok.com/@handsky69" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Facebook</a></li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2024 Midori Minichua — Tous droits réservés</p>
+  <p>Créations artisanales · Près de Lyon</p>
+</div>
+
+<script>
+const cart = JSON.parse(localStorage.getItem('midori_cart') || '[]');
+const count = cart.reduce((s,c) => s+c.qty, 0);
+const badge = document.getElementById('cartCount');
+if (count > 0) { badge.textContent = count; badge.style.display = 'flex'; }
+</script>
+<script src="js/nav.js"></script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ed43ae44c9da46529eac71a26c953028"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
