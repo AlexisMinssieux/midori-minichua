@@ -73,10 +73,23 @@
   display: inline-flex; align-items: center; gap: 6px; align-self: center;
 }
 .event-link-out:hover { color: var(--moss); }
+.past-events { margin-top: 44px; }
+.past-title {
+  font-family: 'Noto Serif JP', serif; font-size: 11px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--stone); font-weight: 500; margin: 0 0 14px;
+}
+.past-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.past-list li {
+  display: flex; gap: 16px; align-items: baseline;
+  padding: 14px 18px; background: var(--white); border: 0.5px solid var(--border); border-radius: 4px;
+}
+.past-date { font-size: 13px; color: var(--moss); font-weight: 600; white-space: nowrap; min-width: 108px; }
+.past-name { font-size: 14.5px; color: var(--stone); }
 @media (max-width: 760px) {
   .event-wrap { padding: 8px 20px 56px; }
   .event-card { grid-template-columns: 1fr; gap: 28px; padding: 22px; }
   .event-poster { max-width: 360px; margin: 0 auto; }
+  .past-list li { flex-direction: column; gap: 3px; }
 }
 </style>
 </head>
@@ -128,25 +141,25 @@
 <div class="event-wrap">
   <article class="event-card">
     <figure class="event-poster">
-      <img src="img/braderie-croix-rousse-2026.jpg" alt="Affiche de la Grande Braderie de la Croix-Rousse, 12 et 13 septembre, Lyon">
+      <img src="img/braderie-gratte-ciel-2026.jpg" alt="Affiche de la Grande Braderie des Gratte-Ciel, 18 et 19 septembre 2026, Villeurbanne">
     </figure>
     <div class="event-info">
       <div class="event-badge"><span class="pulse"></span>Prochain rendez-vous</div>
-      <h2 class="event-title">La Grande Braderie<br>de la Croix-Rousse</h2>
+      <h2 class="event-title">La Grande Braderie<br>des Gratte-Ciel</h2>
 
       <ul class="event-facts">
         <li>
           <span class="ic">📅</span>
           <div>
             <div class="lbl">Dates</div>
-            <div class="val">Vendredi 12 &amp; samedi 13 septembre 2026 · 9h – 19h</div>
+            <div class="val">Vendredi 18 &amp; samedi 19 septembre 2026 · 10h – 19h</div>
           </div>
         </li>
         <li>
           <span class="ic">📍</span>
           <div>
             <div class="lbl">Lieu</div>
-            <div class="val">Quartier de la Croix-Rousse — Lyon</div>
+            <div class="val">Avenue Henri Barbusse, Gratte-Ciel — Villeurbanne</div>
           </div>
         </li>
         <li>
@@ -158,15 +171,14 @@
         </li>
       </ul>
 
-      <p class="event-desc">Deux jours de fête dans l'un des plus beaux quartiers de Lyon : braderie, artisanat, vide-grenier, rue italienne, food-trucks, orchestre et manège. Une belle occasion de flâner et de repartir avec une petite création faite main.</p>
+      <p class="event-desc">Deux jours de bonnes affaires en plein cœur de Villeurbanne, tout au long de l'avenue Henri Barbusse : petits prix, food-court et animations. L'occasion idéale de flâner et de repartir avec une petite création faite main.</p>
 
       <div class="event-tags">
-        <span>Braderie</span><span>Artisanat</span><span>Vide-grenier</span>
-        <span>Food-trucks</span><span>Orchestre</span><span>Manège</span>
+        <span>Braderie</span><span>Petits prix</span><span>Food-court</span><span>Animations</span>
       </div>
 
       <div class="event-note">
-        🍵 Retrouvez notre stand parmi les artisans, et venez échanger autour de nos bonsaïs et jardins miniatures. Au plaisir de vous y croiser !
+        🍵 Retrouvez notre stand parmi les exposants, et venez échanger autour de nos bonsaïs et jardins miniatures. Au plaisir de vous y croiser !
       </div>
 
       <div class="event-actions">
@@ -174,12 +186,23 @@
           Nous contacter
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://reservation-braderiecxrousse.fr" target="_blank" rel="noopener" class="event-link-out">
+        <a href="https://www.instagram.com/destination_gratte_ciel" target="_blank" rel="noopener" class="event-link-out">
           Infos sur l'événement ↗
         </a>
       </div>
     </div>
   </article>
+
+  <!-- ÉVÉNEMENTS PASSÉS -->
+  <section class="past-events">
+    <h3 class="past-title">Déjà passés</h3>
+    <ul class="past-list">
+      <li>
+        <span class="past-date">12–13 sept. 2026</span>
+        <span class="past-name">Grande Braderie de la Croix-Rousse — Lyon</span>
+      </li>
+    </ul>
+  </section>
 </div>
 
 <!-- FOOTER -->
